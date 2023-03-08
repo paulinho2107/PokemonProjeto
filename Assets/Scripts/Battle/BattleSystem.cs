@@ -123,7 +123,27 @@ public class BattleSystem : MonoBehaviour
             playerUnit.FaintAnim();
 
             yield return new WaitForSeconds(1.5f);
-            OnBattleOver(true);
+            var nextPokemon = playerParty.GetHealthyPokemon();
+            if(nextPokemon != null)
+            {
+                playerUnit.Setup(nextPokemon);
+                playerHud.SetData(nextPokemon);
+
+                dialogueBox.SetMoveNames(nextPokemon.Moves);
+
+                yield return dialogueBox.TypeDialogue("GO" + nextPokemon.pBase.name + "!!");
+                yield return new WaitForSeconds(1f);
+                yield return dialogueBox.TypeDialogue($"Choose an Action");
+                yield return new WaitForSeconds(0.5f);
+                PlayerAction();
+
+            }
+
+            else
+            {
+                OnBattleOver(true);
+            }
+            
         }
         else
         {
