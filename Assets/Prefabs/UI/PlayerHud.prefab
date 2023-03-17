@@ -497,9 +497,9 @@ GameObject:
   - component: {fileID: 341735181753396889}
   - component: {fileID: 518202654053662782}
   - component: {fileID: 608027041973668910}
-  - component: {fileID: 407178175736938398}
+  - component: {fileID: 1867065507182154188}
   m_Layer: 0
-  m_Name: PlayerHud
+  m_Name: PlayerHUd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +512,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7721400742525156509}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
   m_Children:
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &407178175736938398
+--- !u!114 &1867065507182154188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,14 +574,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7721400742525156509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f20e71697478745bec240edab6d95c, type: 3}
+  m_Script: {fileID: 11500000, guid: c97bc081c647c7a4c81834eeb814a974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nametext: {fileID: 7993914478429990033}
-  leveltext: {fileID: 8332775026711887976}
+  NameText: {fileID: 7993914478429990033}
+  levelText: {fileID: 8332775026711887976}
   hpBar: {fileID: 3895147261762022562}
-  HpText: {fileID: 6771972522753324027}
-  PreviousHP: 0
+  highlightedColor: {r: 0.34509805, g: 0, b: 0.8862745, a: 1}
+  ActualColor: {r: 0.6784314, g: 0.64705884, b: 0.07450981, a: 1}
 --- !u!1 &8198112997560827047
 GameObject:
   m_ObjectHideFlags: 0

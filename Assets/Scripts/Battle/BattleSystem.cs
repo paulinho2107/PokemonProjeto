@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, enemyMove, Busy }
+public enum BattleState { Start, PlayerAction, PlayerMove, enemyMove, Busy, PartyScreen }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleHud playerHud;
     [SerializeField] BattleDialogueBox dialogueBox;
+    [SerializeField] Partyscreen partyScreen;
 
     public event Action<bool> OnBattleOver;
 
@@ -56,6 +57,12 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.PlayerAction;
         dialogueBox.EnableActionSelector(true);
+    }
+
+    void OpenPartyScreen()
+    {
+        state = BattleState.PartyScreen;
+        partyScreen.gameObject.SetActive(true);
     }
 
     void playerMove()
@@ -223,6 +230,10 @@ public class BattleSystem : MonoBehaviour
             if (currentAction == 2)
             {
                 playerMove();
+            }
+            if(currentAction == 1)
+            {
+                OpenPartyScreen();
             }
         }
     }
