@@ -43,6 +43,8 @@ public class BattleSystem : MonoBehaviour
         playerHud.SetData(playerUnit.Pokemon);
         enemyHud.SetData(enemyUnit.Pokemon);
 
+        partyScreen.Init();
+
         dialogueBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
         yield return dialogueBox.TypeDialogue($"A wild {enemyUnit.Pokemon.pBase.Name} appeared!!!");
@@ -99,7 +101,7 @@ public class BattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             OnBattleOver(true);
-        
+
 
         }
         else
@@ -107,7 +109,7 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyMove());
         }
     }
-    
+
     IEnumerator EnemyMove()
     {
         state = BattleState.enemyMove;
@@ -133,7 +135,7 @@ public class BattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1.5f);
             var nextPokemon = playerParty.GetHealthyPokemon();
-            if(nextPokemon != null)
+            if (nextPokemon != null)
             {
                 playerUnit.Setup(nextPokemon);
                 playerHud.SetData(nextPokemon);
@@ -152,7 +154,7 @@ public class BattleSystem : MonoBehaviour
             {
                 OnBattleOver(true);
             }
-            
+
         }
         else
         {
@@ -163,11 +165,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator ShowDamageDetails(DamageDetails damageDetails)
     {
-        if(damageDetails.Critical == 2f)
+        if (damageDetails.Critical == 2f)
         {
             yield return dialogueBox.TypeDialogue("A Critical hit!!");
         }
-        if(damageDetails.TypeEffect > 1f)
+        if (damageDetails.TypeEffect > 1f)
         {
             yield return dialogueBox.TypeDialogue("It's super effective");
         }
@@ -191,7 +193,7 @@ public class BattleSystem : MonoBehaviour
         }
         if (state == BattleState.PartyScreen)
         {
-            //HandlePartySelection();
+            HandlePartySelection();
         }
     }
 
@@ -239,7 +241,7 @@ public class BattleSystem : MonoBehaviour
             {
                 playerMove();
             }
-            if(currentAction == 1)
+            if (currentAction == 1)
             {
                 OpenPartyScreen();
             }
@@ -288,4 +290,63 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(PerformPlayerMove());
         }
     }
-}
+
+    void HandlePartySelection()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentMember++;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentMember--;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if(currentMember < playerParty.Pokemons.Count - 2)
+            {
+                
+                currentMember += 2;
+            }
+            else if (currentMember == playerParty.Pokemons.Count - 1)
+            {
+                currentMember = 1;
+            }
+            else
+            {
+                currentMember = 0;
+            }
+            
+        }
+
+        else if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if(currentMember > 1)
+            {
+                currentMember -= 2;
+            }
+            else if(currentMember == 1)
+            {
+                currentMember = playerParty.Pokemons.Count - 1;
+            }
+            else if (currentMember == 0)
+            {
+                currentMember = playerParty.Pokemons.Count - 2;
+            }
+        }
+
+        currentMember = Mathf.Clamp(currentMember, 0, playerParty.Pokemons.Count - 1);
+        partyScreen.updateMemberSelection(currentMember);
+    } 
+    
+
+    
+}   
+        
+
+        
+
+
+
