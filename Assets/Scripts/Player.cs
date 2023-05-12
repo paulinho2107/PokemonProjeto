@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float[] Timeforencounter = new float[2];
     [SerializeField] bool IsMoving;
     [SerializeField]float timer;
+    public LayerMask interactabelLayers;
 
     public event Action OnEncountered; 
 
@@ -57,7 +58,20 @@ public class Player : MonoBehaviour
             anim.SetBool("IsMoving", true);
             IsMoving = true;
         }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Interact();
+        }
     }
+
+    void Interact()
+    {
+        var facinDir = new Vector3(anim.GetFloat("Horizontal"), 0, anim.GetFloat("Vertical"));
+        var interactPos = transform.position + facinDir;
+
+        Debug.DrawLine(transform.position, interactPos, Color.blue, 1f);
+    }
+        
 
     private void OnTriggerStay(Collider other)
     {
