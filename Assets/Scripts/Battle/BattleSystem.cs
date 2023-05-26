@@ -19,7 +19,8 @@ public class BattleSystem : MonoBehaviour
     BattleState state;
     int currentAction;
     int currentMove;
-    int currentMember;
+    [SerializeField] int currentMember;
+    int escapeAttempts;
 
     PokeCrias playerParty;
     Pokemon wildPokemon;
@@ -245,6 +246,14 @@ public class BattleSystem : MonoBehaviour
             {
                 OpenPartyScreen();
             }
+            if (currentAction == 3)
+            {
+                StartCoroutine(TryToEscape());
+            }
+            if (currentAction == 0)
+            {
+                //BAG
+            }
         }
     }
 
@@ -341,6 +350,43 @@ public class BattleSystem : MonoBehaviour
         partyScreen.updateMemberSelection(currentMember);
     } 
     
+    IEnumerator TryToEscape()
+    {
+        state = BattleState.Busy;
+        dialogueBox.EnableDialogueText(true);
+
+        escapeAttempts++;
+
+        int playerSpeed = playerUnit.Pokemon.Speed;
+        int enemySpeed = enemyUnit.Pokemon.Speed;
+
+        if(enemySpeed < playerSpeed)
+        {
+            Debug.Log("Correu");
+            yield return dialogueBox.TypeDialogue("Corre caraio corre!!");
+            OnBattleOver(true);
+        }
+        else
+        {
+            float f = ((playerSpeed * 128) / enemySpeed) + 30 * escapeAttempts;
+            Debug.Log($"Primeiro calculo escape: {f}");
+            float oddEscape = f % 256;
+            Debug.Log($"Segundo calculo escape: {oddEscape}");
+
+            if(UnityEngine.Random.Range(0,255) < oddEscape)
+            {
+                yield return dialogueBox.TypeDialogue("Corre caraio corre!!");
+                    OnBattleOver(true);
+            }
+            else
+            {
+                yield return dialogueBox.TypeDialogue("Vish deu não");
+                StartCoroutine(EnemyMove());
+            }
+        }
+    }
+
+
 
     
 }   

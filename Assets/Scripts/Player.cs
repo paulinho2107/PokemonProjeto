@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
         Debug.DrawLine(transform.position, interactPos, Color.blue, 1f);
     }
-        
+
 
     private void OnTriggerStay(Collider other)
     {

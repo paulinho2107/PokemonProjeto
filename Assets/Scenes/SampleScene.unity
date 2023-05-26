@@ -3727,6 +3727,7 @@ MonoBehaviour:
   playerHud: {fileID: 1812683000}
   dialogueBox: {fileID: 104787316}
   partyScreen: {fileID: 1701789490}
+  currentMember: 0
 --- !u!1 &1483726406
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,11 +5409,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wildPokemons:
   - _base: {fileID: 11400000, guid: e84de93e18d9b8945b486b47c7db70f9, type: 2}
-    level: 5
+    level: 2
   - _base: {fileID: 11400000, guid: e84de93e18d9b8945b486b47c7db70f9, type: 2}
-    level: 5
+    level: 2
   - _base: {fileID: 11400000, guid: 354691249fef5354da7374010d9acb59, type: 2}
-    level: 5
+    level: 2
 --- !u!1001 &2015773951
 PrefabInstance:
   m_ObjectHideFlags: 0
