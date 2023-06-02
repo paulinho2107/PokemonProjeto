@@ -348,7 +348,43 @@ public class BattleSystem : MonoBehaviour
 
         currentMember = Mathf.Clamp(currentMember, 0, playerParty.Pokemons.Count - 1);
         partyScreen.updateMemberSelection(currentMember);
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            var selectedMember = playerParty.Pokemons[currentMember];
+            if(selectedMember.HP <= 0)
+            {
+                partyScreen.SetMessageText($"sinto informar a todos os envolvidos mas o nosso querido{selectedMember.pBase.Name} foi de americanas :( ");
+                return;
+            }
+            if(selectedMember == playerUnit.Pokemon)
+            {
+                partyScreen.SetMessageText($"ta chapando? O {selectedMember.pBase.Name} ja ta lutando maluco, escolhe outro ai burro");
+                return;
+            }
+
+            partyScreen.gameObject.SetActive(false);
+            state = BattleState.Busy;
+            StartCoroutine(SwitchPokemon(selectedMember));
+        }
     } 
+
+    IEnumerator SwitchPokemon(Pokemon newPokemon)
+    {
+        yield return dialogueBox.TypeDialogue($"EITA PORRA VOLTA {playerUnit.Pokemon.pBase.Name} VOLTA!! ");
+        playerUnit.FaintAnim();
+        yield return new WaitForSeconds(1.5f);
+
+        playerUnit.Setup(newPokemon);
+        playerHud.SetData(newPokemon);
+        dialogueBox.SetMoveNames(newPokemon.Moves);
+
+        yield return dialogueBox.TypeDialogue($"AGORA É TU {newPokemon.pBase.Name} TE VIRA!!");
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(EnemyMove());
+
+    }
+        
     
     IEnumerator TryToEscape()
     {
@@ -382,8 +418,10 @@ public class BattleSystem : MonoBehaviour
             {
                 yield return dialogueBox.TypeDialogue("Vish deu não");
                 StartCoroutine(EnemyMove());
+
             }
         }
+      
     }
 
 

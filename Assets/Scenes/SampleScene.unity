@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &58801833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1638,7 +1638,7 @@ MonoBehaviour:
   timer: 0
   interactabelLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!143 &627111484
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3048,7 +3048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1197291554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3907,7 +3907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1595241449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5198,6 +5198,7 @@ GameObject:
   - component: {fileID: 1958927486}
   - component: {fileID: 1958927489}
   - component: {fileID: 1958927488}
+  - component: {fileID: 1958927490}
   m_Layer: 6
   m_Name: Npc_poketrainer
   m_TagString: Untagged
@@ -5299,6 +5300,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1958927490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958927485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da84f7801dbfa24fb82cec94d2b8c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    fontS: 0
+    name: 
+    sentences: []
 --- !u!1 &1961595281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,11 +5426,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wildPokemons:
   - _base: {fileID: 11400000, guid: e84de93e18d9b8945b486b47c7db70f9, type: 2}
-    level: 2
+    level: 20
   - _base: {fileID: 11400000, guid: e84de93e18d9b8945b486b47c7db70f9, type: 2}
-    level: 2
+    level: 20
   - _base: {fileID: 11400000, guid: 354691249fef5354da7374010d9acb59, type: 2}
-    level: 2
+    level: 20
 --- !u!1001 &2015773951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5696,7 +5713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2109146394
 BoxCollider:
   m_ObjectHideFlags: 0

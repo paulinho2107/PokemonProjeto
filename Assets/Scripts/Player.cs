@@ -66,10 +66,20 @@ public class Player : MonoBehaviour
 
     void Interact()
     {
-        var facinDir = new Vector3(anim.GetFloat("Horizontal"), 0, anim.GetFloat("Vertical"));
+        var facinDir = new Vector3(anim.GetFloat("Horizontal")*1.5f, 0.5f, anim.GetFloat("Vertical")*1.5f);
         var interactPos = transform.position + facinDir;
 
         Debug.DrawLine(transform.position, interactPos, Color.blue, 1f);
+
+        var colliders = Physics.OverlapSphere(interactPos, 0.3f, interactabelLayers);
+
+        if(colliders != null)
+        {
+            foreach(var collider in colliders)
+            {
+                collider.GetComponent<Interactable>()?.interact();
+            }
+        }
     }
 
 
